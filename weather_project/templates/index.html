@@ -1,0 +1,65 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App SAYYID ISHAQUE VT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body style="font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ url_for('static', filename='background.jpg') }}');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;">
+    <div class="container" style="max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <h1 style="text-align: center;">Weather App</h1>
+        <form method="post" style="display: flex;
+    justify-content: center;
+    margin-bottom: 20px;">
+            <input style="width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;" type="text" name="city" placeholder="Enter city name" required>
+            <button style="padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;" type="submit">Get Weather</button>
+        </form>
+
+        {% if error %}
+            <p class="error" style="color: red;
+    text-align: center;
+    margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
+        {% if weather_data %}
+            <div class="weather-info" style="text-align: center;
+    background-color: #e0f7fa;
+    padding: 15px;
+    border-radius: 5px;">
+                <h2>{{ weather_data.name }}</h2>
+                <p>Temperature: {{ weather_data.main.temp }}°C</p>
+                <p>Weather: {{ weather_data.weather[0].description }}</p>
+                <p>Humidity: {{ weather_data.main.humidity }}%</p>
+                <p>Wind Speed: {{ weather_data.wind.speed }} m/s</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
